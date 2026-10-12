@@ -189,6 +189,8 @@ def post():
         return
     issue = st.get("issue")
     ans = decision(issue) if issue else None
+    if not issue and st.get("status") == "承認済み":
+        ans = "はい"  # Mac の仕組みで、すでに「はい」をもらっていた分
     if ans != "はい":
         st["status"] = "保留" if ans == "いいえ" else "未回答"
         state[e["id"]] = st
