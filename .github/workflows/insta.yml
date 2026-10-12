@@ -1,0 +1,61 @@
+# Instagram 自動投稿（@pfc_balance2026）
+# 時刻はすべて UTC。日本時間 = UTC + 9 時間
+on:
+  schedule:
+    - cron: "0 9 * * *"    # 18:00 JST 翌日分の確認ページを作って通知
+    - cron: "0 11 * * *"   # 20:00 JST 返事がなければ念押し
+    - cron: "0 0 * * *"    # 09:00 JST 返事がなければ最後の念押し
+    - cron: "50 9 * * *"   # 18:50 JST 起動 → 19:00 に投稿（「はい」の分だけ）
+    - cron: "0 1 * * 1"    # 毎週月曜 10:00 JST トークン延長
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "notify / remind / post / refresh / test / testcheck"
+        required: true
+        default: notify
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: insta
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: どの作業かを決める
+        id: m
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 9 * * *") echo "mode=notify" >> "$GITHUB_OUTPUT" ;;
+            "0 11 * * *"|"0 0 * * *") echo "mode=remind" >> "$GITHUB_OUTPUT" ;;
+            "50 9 * * *") echo "mode=post" >> "$GITHUB_OUTPUT" ;;
+            "0 1 * * 1") echo "mode=refresh" >> "$GITHUB_OUTPUT" ;;
+            *) echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - name: トークン延長の準備
+        if: steps.m.outputs.mode == 'refresh'
+        run: pip install pynacl==1.5.0
+      - name: 実行
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: hide1254
+        run: python scripts/insta_gh.py ${{ steps.m.outputs.mode }}
+      - name: 状態を保存
+        if: always()
+        run: |
+          git config user.name "insta-bot"
+          git config user.email "insta-bot@users.noreply.github.com"
+          git add state.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "状態を更新（${{ steps.m.outputs.mode }}）" && git pull --rebase && git push)
