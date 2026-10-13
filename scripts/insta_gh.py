@@ -187,12 +187,16 @@ def post():
     if st.get("status") == "投稿済み":
         print("投稿済み")
         return
+    if st.get("closed"):
+        print(f"今日はすでに「投稿しない」と決めた（{st.get('status')}）")
+        return
     issue = st.get("issue")
     ans = decision(issue) if issue else None
     if not issue and st.get("status") == "承認済み":
         ans = "はい"  # Mac の仕組みで、すでに「はい」をもらっていた分
     if ans != "はい":
         st["status"] = "保留" if ans == "いいえ" else "未回答"
+        st["closed"] = True  # 予備の実行で、あとから投稿しないようにする
         state[e["id"]] = st
         save("state.json", state)
         if issue:
