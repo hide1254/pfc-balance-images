@@ -275,11 +275,30 @@ def refresh():
     print("トークン延長：成功")
 
 
+# ---------- 返事を状態に反映（表示用） ----------
+def sync_decision(day):
+    """返事が来ていれば、投稿を待たずに状態を「承認済み」「保留」に変える（投稿ノートの表示を正しくするため）。"""
+    e = entry_for(day)
+    if not e:
+        return
+    st, _ = state_get()
+    s = st.get(e["id"], {})
+    if not s.get("issue") or s.get("status") in ("投稿済み",) or s.get("closed"):
+        return
+    ans = decision(s["issue"])
+    new = {"はい": "承認済み", "いいえ": "保留"}.get(ans, "確認待ち")
+    if new != s.get("status"):
+        state_update(e["id"], {"status": new}, f"{e['id']} 返事：{ans or 'なし'}")
+        gh("PATCH", f"repos/{REPO}/issues/{s['issue']}", {"labels": [new]})
+        print(f"{e['id']} の状態 → {new}")
+
+
 # ---------- 10分ごと：今やるべきことだけ ----------
 def tick():
     t = now()
     today, tomorrow = t.date(), t.date() + dt.timedelta(days=1)
-    jobs = []
+    jobs = [("今日分の返事の反映", lambda: sync_decision(today)),
+            ("翌日分の返事の反映", lambda: sync_decision(tomorrow))]
     if t.hour < 19:
         jobs.append(("今日分の確認ページ（予備）", lambda: notify(today)))
     if t.hour >= 18:
