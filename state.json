@@ -63,9 +63,12 @@
   "008": {
     "date": "2026-10-19",
     "theme": "炭水化物",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 7,
-    "posting": "2026-10-19T19:20:09+09:00"
+    "posting": "2026-10-19T19:20:09+09:00",
+    "media_id": "18112376726238010",
+    "permalink": "https://www.instagram.com/p/DerB8xaFmyj/",
+    "posted_at": "2026-10-19T19:21:05+09:00"
   },
   "_token": {
     "refreshed": "2026-10-19",
