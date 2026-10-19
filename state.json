@@ -65,5 +65,9 @@
     "theme": "炭水化物",
     "status": "承認済み",
     "issue": 7
+  },
+  "_token": {
+    "refreshed": "2026-10-19",
+    "expires_about": "2026-12-17"
   }
 }
