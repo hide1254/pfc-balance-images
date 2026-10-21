@@ -180,7 +180,18 @@
     "posting": "2026-10-21T19:00:05+09:00",
     "media_id": "18219480985347726",
     "permalink": "https://www.instagram.com/p/DewJPlSFsOt/",
-    "posted_at": "2026-10-21T19:01:01+09:00"
+    "posted_at": "2026-10-21T19:01:01+09:00",
+    "insights": {
+      "post": {
+        "reach": 0,
+        "views": 0,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "at": "2026-10-21T21:00+09:00"
+    }
   },
   "_stock": {
     "checked": "2026-10-21",
