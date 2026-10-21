@@ -259,6 +259,45 @@ def post(day=None):
     print("投稿完了", link)
 
 
+# ---------- リール（昼12時以降・1回だけ） ----------
+def post_reel(day=None):
+    """承認済みの日だけ、同じ内容のリールを投稿する（フィードには出さず、リールのタブに出す）。"""
+    day = day or now().date()
+    e = entry_for(day)
+    if not e:
+        return
+    p = post_data(e)
+    if not p.get("reel"):
+        return
+    st, _ = state_get()
+    s = st.get(e["id"], {})
+    if s.get("reel_status") in ("投稿済み", "失敗") or s.get("closed"):
+        return
+    if s.get("reel_posting"):
+        if now() - dt.datetime.fromisoformat(s["reel_posting"]) < dt.timedelta(minutes=30):
+            return
+    ok = s.get("status") in ("承認済み", "投稿済み") and (not s.get("issue") or decision(s["issue"]) == "はい")
+    if not ok:
+        return  # 「はい」がまだなら、まだ出さない（19時までに「はい」が来れば、その後の回で出す）
+    state_update(e["id"], {"reel_posting": now().isoformat(timespec="seconds")}, f"{e['id']} リール開始")
+    ig_user = os.environ["IG_USER_ID"]
+    try:
+        c = ig("POST", f"{ig_user}/media", {"media_type": "REELS", "video_url": raw(f"posts/{e['id']}/reel.mp4"),
+                                             "caption": p["caption"] + "\n\n" + " ".join(p["hashtags"]),
+                                             "share_to_feed": "false"})
+        wait_container(c["id"], limit=900)
+        media = ig("POST", f"{ig_user}/media_publish", {"creation_id": c["id"]})
+        link = ig("GET", media["id"], {"fields": "permalink"}).get("permalink", "")
+        state_update(e["id"], {"reel_status": "投稿済み", "reel_id": media["id"], "reel_permalink": link},
+                     f"{e['id']} リール投稿済み")
+        if s.get("issue"):
+            comment(s["issue"], f"リールも投稿しました 🎬 {link}")
+        print("リール投稿完了", link)
+    except Exception as ex:
+        state_update(e["id"], {"reel_status": "失敗", "reel_error": str(ex)[:300]}, f"{e['id']} リール失敗")
+        raise
+
+
 # ---------- トークン延長 ----------
 def refresh():
     q = urllib.parse.urlencode({"grant_type": "ig_refresh_token", "access_token": os.environ["IG_ACCESS_TOKEN"]})
@@ -337,6 +376,8 @@ def tick():
         jobs.append(("翌日分の念押し", lambda: remind(tomorrow, "reminded_eve")))
     if 9 <= t.hour < 19:
         jobs.append(("今日分の念押し", lambda: remind(today, "reminded_am")))
+    if t.hour >= 12:
+        jobs.append(("今日分のリール", lambda: post_reel(today)))
     if t.hour >= 19:
         jobs.append(("今日分の投稿", lambda: post(today)))
     if t.hour >= 12:
