@@ -362,6 +362,38 @@ def stock_check():
     state_update("_stock", {"checked": t.date().isoformat(), "days": days}, f"作り置き {days}日分")
 
 
+# ---------- 数字の記録（1日1回） ----------
+METRICS = "reach,views,saved,likes,shares,comments"
+
+
+def record_insights():
+    """投稿済みの投稿（とリール）の数字と、フォロワー数を state.json に記録する。直近30日分。"""
+    t = now()
+    st, _ = state_get()
+    if st.get("_insights", {}).get("date") == t.date().isoformat():
+        return
+    me = ig("GET", "me", {"fields": "followers_count,media_count"})
+    since = (t.date() - dt.timedelta(days=30)).isoformat()
+    for k, s in st.items():
+        if k.startswith("_") or s.get("date", "") < since:
+            continue
+        rec = {}
+        for kind, mid in (("post", s.get("media_id")), ("reel", s.get("reel_id"))):
+            if not mid:
+                continue
+            try:
+                d = ig("GET", f"{mid}/insights", {"metric": METRICS})
+                rec[kind] = {x["name"]: x["values"][0]["value"] for x in d.get("data", [])}
+            except Exception as ex:
+                rec[kind] = {"error": str(ex)[:120]}
+        if rec:
+            rec["at"] = t.isoformat(timespec="minutes")
+            state_update(k, {"insights": rec}, f"{k} 数字")
+    state_update("_insights", {"date": t.date().isoformat(), "followers": me.get("followers_count"),
+                               "media": me.get("media_count")}, "数字の記録")
+    print("数字を記録した：フォロワー", me.get("followers_count"))
+
+
 # ---------- 10分ごと：今やるべきことだけ ----------
 def tick():
     t = now()
@@ -382,6 +414,8 @@ def tick():
         jobs.append(("今日分の投稿", lambda: post(today)))
     if t.hour >= 12:
         jobs.append(("作り置きの見張り", stock_check))
+    if t.hour >= 21:
+        jobs.append(("数字の記録", record_insights))
     if t.weekday() == 0 and t.hour >= 10:
         st, _ = state_get()
         if st.get("_token", {}).get("refreshed") != today.isoformat():
