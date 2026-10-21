@@ -293,6 +293,36 @@ def sync_decision(day):
         print(f"{e['id']} の状態 → {new}")
 
 
+# ---------- 作り置きの見張り（1日1回） ----------
+STOCK_MIN = 3
+
+
+def stock_check():
+    """明日から何日分の投稿が GitHub にそろっているかを数え、STOCK_MIN 日を切ったら知らせる。"""
+    t = now()
+    st, _ = state_get()
+    if st.get("_stock", {}).get("checked") == t.date().isoformat():
+        return
+    days = 0
+    d = t.date() + dt.timedelta(days=1)
+    while True:
+        e = entry_for(d)
+        if not e or not (ROOT / "posts" / e["id"] / "post.json").exists():
+            break
+        days += 1
+        d += dt.timedelta(days=1)
+    if days < STOCK_MIN:
+        empty = t.date() + dt.timedelta(days=days + 1)
+        body = (f"@{OWNER} **作り置きが残り{days}日分**です。このままだと **{label(empty)}** から投稿が止まります。\n\n"
+                f"考えられる原因：Mac の画像づくりが止まっている／Mac をしばらく開いていない／原稿が足りない\n\n"
+                f"Mac を開いて、Claude に「作り置きが足りない」と伝えてください。\n"
+                f"（この知らせは1日1回、作り置きが{STOCK_MIN}日分になるまで届きます）")
+        gh("POST", f"repos/{REPO}/issues", {"title": f"【お知らせ】作り置きが残り{days}日分です", "body": body,
+                                              "labels": ["お知らせ"]})
+        print(f"作り置き不足を通知（残り{days}日）")
+    state_update("_stock", {"checked": t.date().isoformat(), "days": days}, f"作り置き {days}日分")
+
+
 # ---------- 10分ごと：今やるべきことだけ ----------
 def tick():
     t = now()
@@ -309,6 +339,8 @@ def tick():
         jobs.append(("今日分の念押し", lambda: remind(today, "reminded_am")))
     if t.hour >= 19:
         jobs.append(("今日分の投稿", lambda: post(today)))
+    if t.hour >= 12:
+        jobs.append(("作り置きの見張り", stock_check))
     if t.weekday() == 0 and t.hour >= 10:
         st, _ = state_get()
         if st.get("_token", {}).get("refreshed") != today.isoformat():
