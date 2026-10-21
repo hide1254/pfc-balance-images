@@ -134,7 +134,18 @@
     "posting": "2026-10-19T19:20:09+09:00",
     "media_id": "18112376726238010",
     "permalink": "https://www.instagram.com/p/DerB8xaFmyj/",
-    "posted_at": "2026-10-19T19:21:05+09:00"
+    "posted_at": "2026-10-19T19:21:05+09:00",
+    "insights": {
+      "post": {
+        "reach": 0,
+        "views": 0,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "at": "2026-10-21T21:00+09:00"
+    }
   },
   "_token": {
     "refreshed": "2026-10-19",
