@@ -48,7 +48,18 @@
     "posting": "2026-10-15T19:00:11+09:00",
     "media_id": "18141914836720267",
     "permalink": "https://www.instagram.com/p/DegsfM3lnHc/",
-    "posted_at": "2026-10-15T19:01:09+09:00"
+    "posted_at": "2026-10-15T19:01:09+09:00",
+    "insights": {
+      "post": {
+        "reach": 0,
+        "views": 0,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "at": "2026-10-21T21:00+09:00"
+    }
   },
   "005": {
     "date": "2026-10-16",
