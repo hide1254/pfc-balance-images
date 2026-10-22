@@ -200,14 +200,17 @@
   "011": {
     "date": "2026-10-22",
     "theme": "食べなければ痩せる？",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 11,
     "reminded_eve": "2026-10-21T20:16+09:00",
     "reel_posting": "2026-10-22T12:00:07+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18315521674304401",
     "reel_permalink": "https://www.instagram.com/reel/Dex95eljjXm/",
-    "posting": "2026-10-22T19:00:07+09:00"
+    "posting": "2026-10-22T19:00:07+09:00",
+    "media_id": "18633258427015106",
+    "permalink": "https://www.instagram.com/p/DeyuB8SIKB1/",
+    "posted_at": "2026-10-22T19:00:59+09:00"
   },
   "_insights": {
     "date": "2026-10-21",
