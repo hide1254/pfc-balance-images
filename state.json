@@ -338,7 +338,7 @@
   "015": {
     "date": "2026-10-26",
     "theme": "脂質",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 16,
     "reminded_eve": "2026-10-25T20:00+09:00",
     "reminded_am": "2026-10-26T09:00+09:00",
@@ -346,7 +346,10 @@
     "reel_status": "投稿済み",
     "reel_id": "18139778065733874",
     "reel_permalink": "https://www.instagram.com/reel/De8RFYHE4lr/",
-    "posting": "2026-10-26T19:00:12+09:00"
+    "posting": "2026-10-26T19:00:12+09:00",
+    "media_id": "18376204441209753",
+    "permalink": "https://www.instagram.com/p/De9BO-Im94B/",
+    "posted_at": "2026-10-26T19:01:10+09:00"
   },
   "016": {
     "date": "2026-10-27",
