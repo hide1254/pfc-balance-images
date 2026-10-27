@@ -241,15 +241,24 @@ def post(day=None):
     state_update(e["id"], {"posting": now().isoformat(timespec="seconds")}, f"{e['id']} 投稿開始")
     p = post_data(e)
     ig_user = os.environ["IG_USER_ID"]
-    children = []
-    for n in range(1, p["slides"] + 1):
-        c = ig("POST", f"{ig_user}/media", {"image_url": raw(f"posts/{e['id']}/post_{n}.jpg"), "is_carousel_item": "true"})
-        wait_container(c["id"])
-        children.append(c["id"])
-    parent = ig("POST", f"{ig_user}/media", {"media_type": "CAROUSEL", "children": ",".join(children),
-                                              "caption": p["caption"] + "\n\n" + " ".join(p["hashtags"])})
-    wait_container(parent["id"])
-    media = ig("POST", f"{ig_user}/media_publish", {"creation_id": parent["id"]})
+    try:
+        # 前の回で作った箱があれば使い回す（何度も作り直すと、インスタに止められやすい）
+        parent_id = s.get("container")
+        if not parent_id:
+            children = []
+            for n in range(1, p["slides"] + 1):
+                c = ig("POST", f"{ig_user}/media", {"image_url": raw(f"posts/{e['id']}/post_{n}.jpg"), "is_carousel_item": "true"})
+                wait_container(c["id"])
+                children.append(c["id"])
+            parent = ig("POST", f"{ig_user}/media", {"media_type": "CAROUSEL", "children": ",".join(children),
+                                                      "caption": p["caption"] + "\n\n" + " ".join(p["hashtags"])})
+            wait_container(parent["id"])
+            parent_id = parent["id"]
+            state_update(e["id"], {"container": parent_id}, f"{e['id']} 投稿の箱")
+        media = ig("POST", f"{ig_user}/media_publish", {"creation_id": parent_id})
+    except Exception as ex:
+        give_up(e, s, issue, ex, "post")
+        return
     link = ig("GET", media["id"], {"fields": "permalink"}).get("permalink", "")
     state_update(e["id"], {"status": "投稿済み", "media_id": media["id"], "permalink": link,
                            "posted_at": now().isoformat(timespec="seconds")}, f"{e['id']} 投稿済み")
@@ -295,7 +304,38 @@ def post_reel(day=None):
         print("リール投稿完了", link)
     except Exception as ex:
         state_update(e["id"], {"reel_status": "失敗", "reel_error": str(ex)[:300]}, f"{e['id']} リール失敗")
-        raise
+        if s.get("issue"):
+            comment(s["issue"], f"@{OWNER} リールの投稿がうまくいきませんでした（{why_ja(ex)}）。今日のリールはもう試しません。19時の画像の投稿は、いつもどおり進めます。")
+        print("リール失敗", ex)
+
+
+def why_ja(ex):
+    m = str(ex)
+    if "2207051" in m or "action is blocked" in m or "request limit" in m:
+        return "インスタ側で、操作が一時的に制限されました"
+    return "インスタからエラーが返ってきました"
+
+
+def give_up(e, s, issue, ex, kind):
+    """投稿の失敗。インスタに止められたら、その日はもう試さない（やり直すほど制限が長引くため）。
+    それ以外の失敗は、3回まで（20分あけて）やり直す。どちらも、確認ページに1回だけ知らせる。"""
+    m = str(ex)
+    blocked = "2207051" in m or "action is blocked" in m or "request limit" in m
+    tries = s.get("post_tries", 0) + 1
+    stop = blocked or tries >= 3
+    changes = {"post_tries": tries, "post_error": m[:300], "posting": None}
+    if stop:
+        changes.update({"status": "インスタに止められた" if blocked else "投稿失敗", "closed": True})
+    state_update(e["id"], changes, f"{e['id']} 投稿失敗 {tries}回目")
+    print(f"投稿失敗（{tries}回目）：{m[:200]}")
+    if stop and issue:
+        if blocked:
+            msg = (f"@{OWNER} インスタ側で投稿が一時的に制限されたため、**今日の画像の投稿は見送りました**。\n\n"
+                   "何度もやり直すと制限が長引くので、今日はもう試しません。明日の分は、いつもどおり進めます。\n"
+                   "インスタのアプリに「アクションがブロックされました」などのお知らせが出ていないか、見ておいてください。")
+        else:
+            msg = f"@{OWNER} 3回試しましたが、今日の画像を投稿できませんでした。Claude に「投稿の失敗」と伝えてください。\n\n`{m[:200]}`"
+        comment(issue, msg)
 
 
 # ---------- トークン延長 ----------
