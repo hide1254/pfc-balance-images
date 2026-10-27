@@ -292,7 +292,7 @@ def post_reel(day=None):
     ig_user = os.environ["IG_USER_ID"]
     try:
         c = ig("POST", f"{ig_user}/media", {"media_type": "REELS", "video_url": raw(f"posts/{e['id']}/reel.mp4"),
-                                             "caption": p["caption"] + "\n\n" + " ".join(p["hashtags"]),
+                                             "caption": reel_caption(p),
                                              "share_to_feed": "false"})
         wait_container(c["id"], limit=900)
         media = ig("POST", f"{ig_user}/media_publish", {"creation_id": c["id"]})
@@ -307,6 +307,15 @@ def post_reel(day=None):
         if s.get("issue"):
             comment(s["issue"], f"@{OWNER} リールの投稿がうまくいきませんでした（{why_ja(ex)}）。今日のリールはもう試しません。19時の画像の投稿は、いつもどおり進めます。")
         print("リール失敗", ex)
+
+
+def reel_caption(p):
+    """リールの文章は、画像の投稿と同じにしない（同じ日に同じ文・同じタグを2回出すと、インスタに止められやすい）。
+    1行目（表紙の言葉）＋夜の画像の案内だけにして、タグもテーマの3つ＋#おむすび先生 の4つにしぼる。"""
+    first = p["caption"].split("\n")[0]
+    tags = [h for h in p["hashtags"][:3]] + ["#おむすび先生"]
+    return (f"{first}\n\n今夜19時に、5枚の図解でくわしく投稿します。\n"
+            f"気になったら、プロフィールから見てね。\n\n{' '.join(dict.fromkeys(tags))}")
 
 
 def why_ja(ex):
