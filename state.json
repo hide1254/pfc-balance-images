@@ -424,14 +424,17 @@
   "018": {
     "date": "2026-10-29",
     "theme": "糖質を抜けば痩せる？",
-    "status": "承認済み",
+    "status": "インスタに止められた",
     "issue": 19,
     "reel_posting": "2026-10-29T12:00:14+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18133702216771751",
     "reel_permalink": "https://www.instagram.com/reel/DfD_feYldRV/",
-    "posting": "2026-10-29T19:00:16+09:00",
-    "container": "18129123427788366"
+    "posting": null,
+    "container": "18129123427788366",
+    "post_tries": 1,
+    "post_error": "POST https://graph.instagram.com/v23.0/17841423650972499/media_publish → 403 {\"error\":{\"message\":\"Application request limit reached\",\"type\":\"OAuthException\",\"is_transient\":false,\"code\":4,\"error_subcode\":2207051,\"error_user_title\":\"action is blocked\",\"error_user_msg\":\"We restrict certain activity to ",
+    "closed": true
   },
   "019": {
     "date": "2026-10-30",
