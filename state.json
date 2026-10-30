@@ -381,6 +381,14 @@
     "reel_permalink": "https://www.instagram.com/reel/De-14hIAD3E/",
     "posting": null,
     "insights": {
+      "post": {
+        "reach": 0,
+        "views": 0,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
       "reel": {
         "reach": 107,
         "views": 113,
@@ -389,7 +397,7 @@
         "shares": 0,
         "comments": 0
       },
-      "at": "2026-10-29T21:00+09:00"
+      "at": "2026-10-30T21:00+09:00"
     },
     "post_tries": 1,
     "post_error": "2207051 action is blocked（10/27 19:00〜22:40 に10回）",
