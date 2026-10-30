@@ -54,6 +54,9 @@ def http(method, url, body=None, headers=None, form=False):
             txt = r.read().decode()
             return json.loads(txt) if txt else {}
     except urllib.error.HTTPError as e:
+        # 制限の原因を調べられるように、使用量のヘッダーも残す
+        usage = {k: e.headers.get(k) for k in ("X-App-Usage", "X-Business-Use-Case-Usage") if e.headers.get(k)}
+        print("エラーの詳細：", e.code, usage)
         err = RuntimeError(f"{method} {url.split('?')[0]} → {e.code} {e.read().decode()[:300]}")
         err.code = e.code
         raise err
@@ -210,6 +213,42 @@ def wait_container(cid, limit=300):
     raise TimeoutError("インスタの準備が時間内に終わりませんでした")
 
 
+def published_today(ig_user, caption, media_type, day):
+    """今日、同じ1行目の投稿がインスタに出ていれば返す。無ければ None。"""
+    first = caption.split("\n")[0].strip()
+    items = ig("GET", f"{ig_user}/media", {"fields": "id,caption,media_type,timestamp", "limit": 15}).get("data", [])
+    for m in items:
+        at = dt.datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z").astimezone(JST)
+        if at.date() == day and m.get("media_type") == media_type and (m.get("caption") or "").split("\n")[0].strip() == first:
+            return m
+    return None
+
+
+def publish_checked(ig_user, creation_id, caption, media_type, day):
+    """投稿する。エラーが返っても投稿は出ていることがある（2026-10-27〜30 に実際に起きた）ので、
+    失敗と決める前に、インスタの投稿一覧で確かめる（同じ投稿を2回出さないため）。"""
+    # 先に確かめる。すでに出ていれば投稿しない。一覧を読めない時も、二重を避けるため投稿しない（ここで止まる）
+    found = published_today(ig_user, caption, media_type, day)
+    if found:
+        print("今日の分はもう出ていたので、投稿しません", found["id"])
+        return found
+    try:
+        return ig("POST", f"{ig_user}/media_publish", {"creation_id": creation_id})
+    except Exception as ex:
+        print("投稿の返事がエラー。実際に出たか確かめます：", str(ex)[:200])
+        for wait in (20, 40, 60):
+            time.sleep(wait)
+            try:
+                found = published_today(ig_user, caption, media_type, day)
+            except Exception as check:
+                print("投稿一覧を読めませんでした：", str(check)[:200])
+                continue
+            if found:
+                print("エラーでしたが、投稿は出ていました", found["id"])
+                return found
+        raise ex
+
+
 def post(day=None):
     day = day or now().date()
     e = entry_for(day)
@@ -255,7 +294,7 @@ def post(day=None):
             wait_container(parent["id"])
             parent_id = parent["id"]
             state_update(e["id"], {"container": parent_id}, f"{e['id']} 投稿の箱")
-        media = ig("POST", f"{ig_user}/media_publish", {"creation_id": parent_id})
+        media = publish_checked(ig_user, parent_id, p["caption"], "CAROUSEL_ALBUM", day)
     except Exception as ex:
         give_up(e, s, issue, ex, "post")
         return
@@ -295,7 +334,7 @@ def post_reel(day=None):
                                              "caption": reel_caption(p),
                                              "share_to_feed": "false"})
         wait_container(c["id"], limit=900)
-        media = ig("POST", f"{ig_user}/media_publish", {"creation_id": c["id"]})
+        media = publish_checked(ig_user, c["id"], p["caption"], "VIDEO", day)
         link = ig("GET", media["id"], {"fields": "permalink"}).get("permalink", "")
         state_update(e["id"], {"reel_status": "投稿済み", "reel_id": media["id"], "reel_permalink": link},
                      f"{e['id']} リール投稿済み")
