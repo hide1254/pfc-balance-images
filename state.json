@@ -373,7 +373,7 @@
   "016": {
     "date": "2026-10-27",
     "theme": "青魚（さば・いわし）",
-    "status": "インスタに止められた",
+    "status": "投稿済み",
     "issue": 17,
     "reel_posting": "2026-10-27T12:00:11+09:00",
     "reel_status": "投稿済み",
@@ -393,12 +393,16 @@
     },
     "post_tries": 1,
     "post_error": "2207051 action is blocked（10/27 19:00〜22:40 に10回）",
-    "closed": true
+    "closed": true,
+    "media_id": "18127818679857071",
+    "permalink": "https://www.instagram.com/p/De_mCEckQCV/",
+    "posted_at": "2026-10-27T19:01:08+09:00",
+    "note": "エラーが返ったが投稿は出ていた（2026-10-30 に投稿一覧で確認して記録を訂正）"
   },
   "017": {
     "date": "2026-10-28",
     "theme": "朝ごはん",
-    "status": "インスタに止められた",
+    "status": "投稿済み",
     "issue": 18,
     "reel_posting": "2026-10-28T12:00:12+09:00",
     "reel_status": "投稿済み",
@@ -419,12 +423,16 @@
         "comments": 0
       },
       "at": "2026-10-29T21:00+09:00"
-    }
+    },
+    "media_id": "18089279900283026",
+    "permalink": "https://www.instagram.com/p/DfCKzTfkQ4n/",
+    "posted_at": "2026-10-28T19:00:57+09:00",
+    "note": "エラーが返ったが投稿は出ていた（2026-10-30 に投稿一覧で確認して記録を訂正）"
   },
   "018": {
     "date": "2026-10-29",
     "theme": "糖質を抜けば痩せる？",
-    "status": "インスタに止められた",
+    "status": "投稿済み",
     "issue": 19,
     "reel_posting": "2026-10-29T12:00:14+09:00",
     "reel_status": "投稿済み",
@@ -445,12 +453,16 @@
         "comments": 0
       },
       "at": "2026-10-29T21:00+09:00"
-    }
+    },
+    "media_id": "17914430610515386",
+    "permalink": "https://www.instagram.com/p/DfEvm2Ym7cS/",
+    "posted_at": "2026-10-29T19:01:02+09:00",
+    "note": "エラーが返ったが投稿は出ていた（2026-10-30 に投稿一覧で確認して記録を訂正）"
   },
   "019": {
     "date": "2026-10-30",
     "theme": "睡眠と食事",
-    "status": "インスタに止められた",
+    "status": "投稿済み",
     "issue": 20,
     "reel_posting": "2026-10-30T12:00:08+09:00",
     "reel_status": "投稿済み",
@@ -460,7 +472,11 @@
     "container": "18129404707788366",
     "post_tries": 1,
     "post_error": "POST https://graph.instagram.com/v23.0/17841423650972499/media_publish → 403 {\"error\":{\"message\":\"Application request limit reached\",\"type\":\"OAuthException\",\"is_transient\":false,\"code\":4,\"error_subcode\":2207051,\"error_user_title\":\"action is blocked\",\"error_user_msg\":\"We restrict certain activity to ",
-    "closed": true
+    "closed": true,
+    "media_id": "18003759245806883",
+    "permalink": "https://www.instagram.com/p/DfHUaRpG8Z9/",
+    "posted_at": "2026-10-30T19:01:06+09:00",
+    "note": "エラーが返ったが投稿は出ていた（2026-10-30 に投稿一覧で確認して記録を訂正）"
   },
   "020": {
     "date": "2026-10-31",
