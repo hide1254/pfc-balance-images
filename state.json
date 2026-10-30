@@ -500,7 +500,26 @@
     "media_id": "18003759245806883",
     "permalink": "https://www.instagram.com/p/DfHUaRpG8Z9/",
     "posted_at": "2026-10-30T19:01:06+09:00",
-    "note": "エラーが返ったが投稿は出ていた（2026-10-30 に投稿一覧で確認して記録を訂正）"
+    "note": "エラーが返ったが投稿は出ていた（2026-10-30 に投稿一覧で確認して記録を訂正）",
+    "insights": {
+      "post": {
+        "reach": 0,
+        "views": 0,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "reel": {
+        "reach": 103,
+        "views": 112,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "at": "2026-10-30T21:00+09:00"
+    }
   },
   "020": {
     "date": "2026-10-31",
