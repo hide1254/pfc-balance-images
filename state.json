@@ -524,14 +524,17 @@
   "020": {
     "date": "2026-10-31",
     "theme": "お惣菜の選び方",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 21,
     "reel_posting": "2026-10-31T12:00:12+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18647435164009709",
     "reel_permalink": "https://www.instagram.com/reel/DfJJEMSiSSJ/",
     "posting": "2026-10-31T19:00:11+09:00",
-    "container": "18129656947788366"
+    "container": "18129656947788366",
+    "media_id": "17913909474506697",
+    "permalink": "https://www.instagram.com/p/DfJ5MBtEVcU/",
+    "posted_at": "2026-10-31T19:01:20+09:00"
   },
   "021": {
     "date": "2026-11-01",
