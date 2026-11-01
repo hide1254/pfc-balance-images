@@ -558,7 +558,7 @@
   "021": {
     "date": "2026-11-01",
     "theme": "第3週の復習",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 22,
     "reminded_eve": "2026-10-31T20:00+09:00",
     "reel_posting": "2026-11-01T12:00:12+09:00",
@@ -566,7 +566,10 @@
     "reel_id": "17927347794200856",
     "reel_permalink": "https://www.instagram.com/reel/DfLt2ySAfdH/",
     "posting": "2026-11-01T19:00:14+09:00",
-    "container": "18129947242788366"
+    "container": "18129947242788366",
+    "media_id": "17954533392318259",
+    "permalink": "https://www.instagram.com/p/DfMeAXwFo_D/",
+    "posted_at": "2026-11-01T19:01:27+09:00"
   },
   "022": {
     "date": "2026-11-02",
