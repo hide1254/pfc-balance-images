@@ -662,14 +662,17 @@
   "024": {
     "date": "2026-11-04",
     "theme": "夕食の時間と内容",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 25,
     "reel_posting": "2026-11-04T12:00:23+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18128177369512571",
     "reel_permalink": "https://www.instagram.com/reel/DfTcSc8AjEV/",
     "posting": "2026-11-04T19:00:19+09:00",
-    "container": "18130658506788366"
+    "container": "18130658506788366",
+    "media_id": "17965908138250572",
+    "permalink": "https://www.instagram.com/p/DfUMZGHHAez/",
+    "posted_at": "2026-11-04T19:01:33+09:00"
   },
   "025": {
     "date": "2026-11-05",
