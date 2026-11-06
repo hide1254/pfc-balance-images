@@ -742,7 +742,26 @@
     "container": "18131129299788366",
     "media_id": "18107856149634387",
     "permalink": "https://www.instagram.com/p/DfZV-6cFlfl/",
-    "posted_at": "2026-11-06T19:01:32+09:00"
+    "posted_at": "2026-11-06T19:01:32+09:00",
+    "insights": {
+      "post": {
+        "reach": 0,
+        "views": 0,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "reel": {
+        "reach": 33,
+        "views": 34,
+        "saved": 0,
+        "likes": 0,
+        "shares": 0,
+        "comments": 0
+      },
+      "at": "2026-11-06T21:00+09:00"
+    }
   },
   "027": {
     "date": "2026-11-07",
