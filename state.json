@@ -730,7 +730,7 @@
   "026": {
     "date": "2026-11-06",
     "theme": "便秘と食事",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 27,
     "reminded_eve": "2026-11-05T20:00+09:00",
     "reminded_am": "2026-11-06T09:00+09:00",
@@ -739,7 +739,10 @@
     "reel_id": "18645911812047070",
     "reel_permalink": "https://www.instagram.com/reel/DfYl6e1AObW/",
     "posting": "2026-11-06T19:00:17+09:00",
-    "container": "18131129299788366"
+    "container": "18131129299788366",
+    "media_id": "18107856149634387",
+    "permalink": "https://www.instagram.com/p/DfZV-6cFlfl/",
+    "posted_at": "2026-11-06T19:01:32+09:00"
   },
   "027": {
     "date": "2026-11-07",
