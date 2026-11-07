@@ -766,7 +766,7 @@
   "027": {
     "date": "2026-11-07",
     "theme": "コンビニの間食",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 28,
     "reminded_eve": "2026-11-06T20:00+09:00",
     "reel_posting": "2026-11-07T12:00:10+09:00",
@@ -774,7 +774,10 @@
     "reel_id": "18100220159423577",
     "reel_permalink": "https://www.instagram.com/reel/DfbKn4RlwnK/",
     "posting": "2026-11-07T19:00:10+09:00",
-    "container": "18131360554788366"
+    "container": "18131360554788366",
+    "media_id": "18116973209030359",
+    "permalink": "https://www.instagram.com/p/Dfb6vj9EWUJ/",
+    "posted_at": "2026-11-07T19:01:15+09:00"
   },
   "028": {
     "date": "2026-11-08",
