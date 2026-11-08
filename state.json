@@ -801,14 +801,17 @@
   "028": {
     "date": "2026-11-08",
     "theme": "第4週の復習",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 29,
     "reel_posting": "2026-11-08T12:00:10+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18101038046091284",
     "reel_permalink": "https://www.instagram.com/reel/Dfdva0uAcGa/",
     "posting": "2026-11-08T19:00:11+09:00",
-    "container": "18131596594788366"
+    "container": "18131596594788366",
+    "media_id": "18440701267177228",
+    "permalink": "https://www.instagram.com/p/Dfefj6GG-C_/",
+    "posted_at": "2026-11-08T19:01:27+09:00"
   },
   "029": {
     "date": "2026-11-09",
