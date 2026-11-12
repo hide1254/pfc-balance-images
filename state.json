@@ -937,14 +937,17 @@
   "032": {
     "date": "2026-11-12",
     "theme": "甘いものがやめられない",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 33,
     "reel_posting": "2026-11-12T12:00:10+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18092272076308238",
     "reel_permalink": "https://www.instagram.com/reel/DfoCmPuDR5i/",
     "posting": "2026-11-12T19:00:14+09:00",
-    "container": "18132625390788366"
+    "container": "18132625390788366",
+    "media_id": "17871106788662488",
+    "permalink": "https://www.instagram.com/p/DfoyvurltJq/",
+    "posted_at": "2026-11-12T19:01:11+09:00"
   },
   "033": {
     "date": "2026-11-13",
