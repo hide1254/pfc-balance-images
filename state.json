@@ -1110,7 +1110,7 @@
   "037": {
     "date": "2026-11-17",
     "theme": "みかん・冬の果物",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 38,
     "reminded_eve": "2026-11-16T20:00+09:00",
     "reminded_am": "2026-11-17T09:00+09:00",
@@ -1119,7 +1119,10 @@
     "reel_id": "18134939104786487",
     "reel_permalink": "https://www.instagram.com/reel/Df06kzJDB6s/",
     "posting": "2026-11-17T19:00:10+09:00",
-    "container": "18134020363788366"
+    "container": "18134020363788366",
+    "media_id": "18403993378162346",
+    "permalink": "https://www.instagram.com/p/Df1quPCG97e/",
+    "posted_at": "2026-11-17T19:01:14+09:00"
   },
   "038": {
     "date": "2026-11-18",
