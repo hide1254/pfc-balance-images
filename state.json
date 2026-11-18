@@ -1146,7 +1146,7 @@
   "038": {
     "date": "2026-11-18",
     "theme": "時短ごはん（のせるだけ丼）",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 39,
     "reminded_eve": "2026-11-17T20:00+09:00",
     "reminded_am": "2026-11-18T09:00+09:00",
@@ -1155,7 +1155,10 @@
     "reel_id": "18096789689189459",
     "reel_permalink": "https://www.instagram.com/reel/Df3fXSuFJUE/",
     "posting": "2026-11-18T19:00:11+09:00",
-    "container": "18134215408788366"
+    "container": "18134215408788366",
+    "media_id": "18026865416720119",
+    "permalink": "https://www.instagram.com/p/Df4PgZtlewh/",
+    "posted_at": "2026-11-18T19:01:06+09:00"
   },
   "039": {
     "date": "2026-11-19",
