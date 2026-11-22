@@ -1262,7 +1262,7 @@
   "042": {
     "date": "2026-11-22",
     "theme": "第6週の復習",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 43,
     "reminded_eve": "2026-11-21T20:00+09:00",
     "reminded_am": "2026-11-22T09:00+09:00",
@@ -1271,7 +1271,10 @@
     "reel_id": "18222176905351606",
     "reel_permalink": "https://www.instagram.com/reel/DgBynMzmF9F/",
     "posting": "2026-11-22T19:00:07+09:00",
-    "container": "18135030940788366"
+    "container": "18135030940788366",
+    "media_id": "18156947491557582",
+    "permalink": "https://www.instagram.com/p/DgCiq-pFhEg/",
+    "posted_at": "2026-11-22T19:00:53+09:00"
   },
   "043": {
     "date": "2026-11-23",
