@@ -1343,14 +1343,17 @@
   "045": {
     "date": "2026-11-25",
     "theme": "食べる量が少なすぎるサイン",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 46,
     "reel_posting": "2026-11-25T12:00:09+09:00",
     "reel_status": "投稿済み",
     "reel_id": "18456157267127061",
     "reel_permalink": "https://www.instagram.com/reel/DgJg7f6h2o1/",
     "posting": "2026-11-25T19:00:12+09:00",
-    "container": "18135604261788366"
+    "container": "18135604261788366",
+    "media_id": "18109243754346989",
+    "permalink": "https://www.instagram.com/p/DgKRE7Aka_H/",
+    "posted_at": "2026-11-25T19:01:05+09:00"
   },
   "046": {
     "date": "2026-11-26",
