@@ -1411,7 +1411,7 @@
   "047": {
     "date": "2026-11-27",
     "theme": "胃腸が疲れた日",
-    "status": "承認済み",
+    "status": "投稿済み",
     "issue": 48,
     "reminded_eve": "2026-11-26T20:00+09:00",
     "reminded_am": "2026-11-27T09:00+09:00",
@@ -1420,7 +1420,10 @@
     "reel_id": "18135525592683336",
     "reel_permalink": "https://www.instagram.com/reel/DgO81r1h6-E/",
     "posting": "2026-11-27T19:00:13+09:00",
-    "container": "18135964240788366"
+    "container": "18135964240788366",
+    "media_id": "18135923270500843",
+    "permalink": "https://www.instagram.com/p/DgPaq2yFuo_/",
+    "posted_at": "2026-11-27T19:01:10+09:00"
   },
   "048": {
     "date": "2026-11-28",
