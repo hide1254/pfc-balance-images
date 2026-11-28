@@ -1454,7 +1454,7 @@
     "reel_status": "投稿済み",
     "reel_id": "17923607412530699",
     "reel_permalink": "https://www.instagram.com/reel/DgRPX2nxshR/",
-    "posting": null,
+    "posting": "2026-11-28T19:10:08+09:00",
     "post_tries": 1,
     "post_error": "POST https://graph.instagram.com/v23.0/17841423650972499/media → 400 {\"error\":{\"message\":\"Only photo or video can be accepted as media type.\",\"type\":\"OAuthException\",\"code\":9004,\"error_subcode\":2207052,\"is_transient\":false,\"error_user_title\":\"Media download has failed. The media URI doesn't meet our"
   },
